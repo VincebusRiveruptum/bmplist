@@ -11,15 +11,11 @@
 
 */
 
-#include "data.h"
-#include "types.h"
-#include "video.h"
 #include "bmp.h"
 
 // Main loop
 
-int main(int argc, char *argv[])
-{
+int main(int argc, char *argv[]){
 
     // BMP list loading,,,
     BMPfile *firstFile = loadBMPfile(".\\jump\\frame1.bmp");
@@ -50,15 +46,12 @@ int main(int argc, char *argv[])
 
     setPalette(firstFile->bmpData->palette);
 
-    while (gameTicks < 600)
-    {
+    while (gameTicks < 600){
             drawBitmap(&(getNodeByIndex(&bmpList, index)->data), 1, 1, 256);
 
-            if (index == bmpList->length)
-            {
+            if (index == bmpList->length){
                 index = 0;
-            }
-            else
+            }else
             {
                 index++;
             }

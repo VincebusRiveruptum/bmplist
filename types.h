@@ -1,12 +1,15 @@
+#ifndef TYPES_H
+#define TYPES_H
+
+#include "data.h"
 typedef struct FileHeader{
 	unsigned char id[2];
 	long size;
 	int res1[2];
-	long offset;	/* Offset de la imagen donde se encuentra */
+	long offset;	
 }FileHeader;
 
 typedef struct InfoHeader{
-	/* Header tipo W3.0 */
 	long hsize;
 	long x;
 	long y;
@@ -41,8 +44,7 @@ typedef struct BMPdata{                     // Raw bmp data
     long height;
 }BMPdata;
 
-/////}
+extern List *bmpList = NULL;
+extern Color *globalPalette = NULL;
 
-List *bmpList = NULL;
-Color *globalPalette = NULL;
-
+#endif

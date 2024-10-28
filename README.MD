@@ -9,5 +9,5 @@ To getting it run you need:
     - Watcom C 10.6
     - Some files to draw, already there are some on JUMP folder.
 
-After installing WATCOM C, on the root folder of the repo just run WCL386 BMPLIST.C
+After installing WATCOM C, on the root folder of the repo just run WCL386 BMPLIST.C BMP.C VIDEO.C DATA.C
 and wait to finish compile. After compiling just run the generated exe.
