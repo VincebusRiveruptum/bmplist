@@ -34,7 +34,7 @@ void addToList(List **list, Node *newNode){
     (*list)->length++;
 }
 
-Node *deleteNodeByIndex(List **list, int index){
+void deleteNodeByIndex(List **list, int index){
     int i=0;
     Node *rec = (*list)->firstNode;
 
@@ -44,7 +44,8 @@ Node *deleteNodeByIndex(List **list, int index){
             (*list)->firstNode->prev = NULL;
         }
         free((*list)->firstNode->data);
-        return rec;
+        free((*list)->firstNode);
+        return;
     }else{
         while(rec != NULL){
             if(rec->prev != NULL && i == (index - 1)){
@@ -55,12 +56,78 @@ Node *deleteNodeByIndex(List **list, int index){
                 rec->next->prev = rec->prev;
             }
             i++;
-            //free(rec->data);
-            return rec;
+            free(rec->data);
+            free(rec);
+            return;
         }
+    }
+    return;
+}
+
+// TODO : TEST THIS FUNCTION
+Node *insertByIndex(List **list, Node *newNode, unsigned int index){
+    Node *temp = NULL;
+    if((*list) != NULL && ((index - 1) < (*list)->length)){        
+        temp = getNodeByIndex(list, index);
+
+        if(temp != NULL){
+            newNode->next = temp;
+            newNode->prev = temp->prev;
+            temp->prev = newNode;
+            (*list)->length++;
+            return newNode;
+        }else{
+            return NULL;
+        }
+    }else{
+        return NULL;
+    }
+}
+
+// TODO : TEST THIS FUNCTION
+
+Node *pop(List **list){
+    Node *popped = NULL;
+
+    if((*list) != NULL && (*list)->lastNode != NULL){
+        popped = (*list)->lastNode;
+        (*list)->lastNode = (*list)->lastNode->prev;
+        (*list)->lastNode->next = NULL;
+        (*list)->length--;
+
+        popped->next = NULL;
+        popped->prev = NULL;
+        return popped;
     }
     return NULL;
 }
+
+// TODO: TEST THIS FUNCTION
+
+List *invertList(List **list){
+    Node *rec, *tmp = NULL;
+    unsigned int i=0;
+
+    if((*list) != NULL){
+        (*list)->firstNode = (*list)->lastNode;       
+        rec = (*list)->lastNode;
+
+        do{
+            tmp = rec->next;
+            rec->next = rec->prev;
+            rec->prev = tmp;
+
+            rec = rec->next;
+            i++;
+        } while(rec != NULL);
+
+        (*list)->lastNode = rec;
+
+        return (*list);
+    }
+    return NULL;
+}
+
 
 Node *getNodeByIndex(List **list, int index){
     Node *rec = (*list)->firstNode;
@@ -76,17 +143,6 @@ Node *getNodeByIndex(List **list, int index){
         }
     }
     return NULL;
-}
-
-int calculateListSize(List *list){
-    int i = 0;
-    Node *rec = (list)->firstNode;
-
-    while(rec != NULL){
-        i++;
-        rec = rec->next;
-    }
-    return i;
 }
 
 void freeList(List **list){

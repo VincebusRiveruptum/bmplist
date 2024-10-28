@@ -20,9 +20,13 @@ typedef struct List{
 
 void addToList(List **list, Node *newNode);
 Node *createNode(void *data);
-Node *deleteNodeByIndex(List **list, int index);
 Node *getNodeByIndex(List **list, int index);
-int calculateListSize(List *list);
+void deleteNodeByIndex(List **list, int index);
+
+Node *insertByIndex(List **list, Node *newNode, unsigned int index);
+Node *pop(List **list);
+List *invertList(List **list);
+
 void freeList(List **list);
 
 #endif

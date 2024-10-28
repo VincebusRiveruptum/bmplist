@@ -22,6 +22,8 @@ int main(int argc, char *argv[]){
     unsigned long gameTicks = 0;
     unsigned long index = 0;
 
+    Node *popped = NULL;
+
     addBMPtoList(&bmpList, firstFile->bmpData);
     addBMPtoList(&bmpList, loadBMPfile(".\\jump\\frame2.bmp")->bmpData);
     addBMPtoList(&bmpList, loadBMPfile(".\\jump\\frame3.bmp")->bmpData);
@@ -37,6 +39,8 @@ int main(int argc, char *argv[]){
     addBMPtoList(&bmpList, loadBMPfile(".\\jump\\frame13.bmp")->bmpData);
     addBMPtoList(&bmpList, loadBMPfile(".\\jump\\frame14.bmp")->bmpData);
     addBMPtoList(&bmpList, loadBMPfile(".\\jump\\frame15.bmp")->bmpData);
+
+    invertList(&bmpList);
 
     printf("\nFiles loaded : %d", bmpList->length);
 
@@ -55,9 +59,6 @@ int main(int argc, char *argv[]){
             {
                 index++;
             }
-         
-        
-
         flipPage(); 
         gameTicks++;
     }
